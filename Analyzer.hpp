@@ -1,3 +1,10 @@
+/*
+    Programmer: Zach Nett
+    Date: 5/26/2020
+    File: Analyzer.hpp
+    Purpose: Practice multithreaded programming in C++
+*/
+
 #pragma once
 #include "TextAnalyzer.hpp"
 
@@ -8,7 +15,6 @@ public:
 
     void setID(const std::string &new_id) { id = new_id; }
     std::string getID() { return id; }
-
     int getWordCount() { return word_count; }
 
     // Loads text from file with const string filename.
