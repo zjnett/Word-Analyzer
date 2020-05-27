@@ -1,5 +1,5 @@
-#ifndef TEXT_ANALYZER
-#define TEXT_ANALYZER
+#ifndef TEXT_ANALYZER_HPP
+#define TEXT_ANALYZER_HPP
 
 #include <iostream>
 #include <unordered_map>
