@@ -18,6 +18,8 @@ public:
     void printFrequency();
     // Finds longest word in frequency list
     std::string findLongestWord();
+    // Finds average word length in frequency list
+    double findAverageWordLength();
     // Prints current word count.
     void printWordCount() { std::cout << "Word Count: " << word_count << std::endl; }
     // Prints all relevant data to a file.
@@ -66,6 +68,15 @@ std::string Analyzer::findLongestWord() {
     return longest_word;
 }
 
+double Analyzer::findAverageWordLength() {
+    int sum_word_lengths = 0;
+    for (std::pair<std::string, int> word : frequency) {
+        // multiply length of word by frequency of word, add to sum
+        sum_word_lengths += word.first.length() * word.second;
+    }
+    return (double) sum_word_lengths / word_count;
+}
+
 std::string Analyzer::removeExtension(const std::string &s) {
     size_t last_index = s.find_last_of(".");
     std::string n_string = s.substr(0, last_index);
@@ -88,6 +99,7 @@ bool Analyzer::printDataToFile() {
             file << "Word: " << word.first << "\tFrequency: " << word.second << std::endl;
         }
         file << "Longest word is " << findLongestWord() << std::endl;
+        file << "Average word length is " << findAverageWordLength() << std::endl;
         file << "Word Count: " << word_count << std::endl;
         file.close();
         status = true;
@@ -98,7 +110,6 @@ bool Analyzer::printDataToFile() {
 /*
 
 a.findAverageWordLength();
-    a.findLongestWord();
     a.findShortestWord();
     a.findMostCommonWords();
 
