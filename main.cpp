@@ -15,6 +15,9 @@
 
 int main(void) {
     Analyzer a;
+
+    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+
     if (a.loadText("frankenstein.txt")) {
         // if text could be loaded successfully
         std::cout << "Text loaded successfully!" << std::endl;
@@ -25,6 +28,11 @@ int main(void) {
         std::vector<std::string> most_common_words = a.findMostCommonWords();
         a.printCommonWords(most_common_words);
         a.printWordCount();
+
+        std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> time_took = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+        std::cout << "Program took " << time_took.count() << " seconds to calculate." << std::endl;
+
         if (a.printDataToFile()) {
             std::cout << "Successfully wrote to file!\n";
         } else {

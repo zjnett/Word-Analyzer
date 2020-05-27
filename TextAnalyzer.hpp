@@ -14,6 +14,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <chrono>
 #include "Analyzer.hpp"
 
 #endif
