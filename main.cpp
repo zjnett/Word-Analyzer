@@ -17,6 +17,18 @@
 
 int main(void) {
     Analyzer a;
-    a.print();
+    if (a.loadText("290-essay.txt")) {
+        // if text could be loaded successfully
+        std::cout << "Text loaded successfully!" << std::endl;
+        a.printFrequency();
+        a.printWordCount();
+    } else {
+        std::cout << "Error loading text." << std::endl;
+    }
+    /*a.loadText("name.txt");
+    a.findAverageWordLength();
+    a.findLongestWord();
+    a.findShortestWord();
+    a.findMostCommonWords();*/
     return 0;
 }
