@@ -22,6 +22,7 @@ int main(void) {
         std::cout << "Text loaded successfully!" << std::endl;
         a.printFrequency();
         std::cout << "Longest word is " << a.findLongestWord() << std::endl;
+        std::cout << "Shortest word is " << a.findShortestWord() << std::endl;
         std::cout << "Average word length is " << a.findAverageWordLength() << std::endl;
         a.printWordCount();
         if (a.printDataToFile()) {

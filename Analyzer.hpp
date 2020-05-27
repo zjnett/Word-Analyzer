@@ -16,13 +16,15 @@ public:
     bool loadText(const std::string &filename);
     // Prints all keys and values in frequency map.
     void printFrequency();
-    // Finds longest word in frequency list
+    // Finds longest word in frequency list, returns longest word.
     std::string findLongestWord();
-    // Finds average word length in frequency list
+    // Finds shortest word in frequency list, returns shortest word.
+    std::string findShortestWord();
+    // Finds average word length in frequency list, returns average word length.
     double findAverageWordLength();
     // Prints current word count.
     void printWordCount() { std::cout << "Word Count: " << word_count << std::endl; }
-    // Prints all relevant data to a file.
+    // Prints all relevant data to a file, returns if file was able to be created/written to.
     bool printDataToFile();
 
 private:
@@ -68,6 +70,15 @@ std::string Analyzer::findLongestWord() {
     return longest_word;
 }
 
+std::string Analyzer::findShortestWord() {
+    std::string shortest_word = frequency.begin()->first;
+    for (std::pair<std::string, int> word : frequency) {
+        if (word.first.length() < shortest_word.length() && word.first != "")
+            shortest_word = word.first;
+    }
+    return shortest_word;
+}
+
 double Analyzer::findAverageWordLength() {
     int sum_word_lengths = 0;
     for (std::pair<std::string, int> word : frequency) {
@@ -99,6 +110,7 @@ bool Analyzer::printDataToFile() {
             file << "Word: " << word.first << "\tFrequency: " << word.second << std::endl;
         }
         file << "Longest word is " << findLongestWord() << std::endl;
+        file << "Shortest word is " << findShortestWord() << std::endl;
         file << "Average word length is " << findAverageWordLength() << std::endl;
         file << "Word Count: " << word_count << std::endl;
         file.close();
@@ -108,8 +120,6 @@ bool Analyzer::printDataToFile() {
 }
 
 /*
-
-a.findAverageWordLength();
     a.findShortestWord();
     a.findMostCommonWords();
 
