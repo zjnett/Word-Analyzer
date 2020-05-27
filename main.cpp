@@ -15,7 +15,7 @@
 
 int main(void) {
     Analyzer a;
-    if (a.loadText("290-essay.txt")) {
+    if (a.loadText("frankenstein.txt")) {
         // if text could be loaded successfully
         std::cout << "Text loaded successfully!" << std::endl;
         a.printFrequency();
