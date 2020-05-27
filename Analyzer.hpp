@@ -16,6 +16,8 @@ public:
     bool loadText(const std::string &filename);
     // Prints all keys and values in frequency map.
     void printFrequency();
+    // Finds longest word in frequency list
+    std::string findLongestWord();
     // Prints current word count.
     void printWordCount() { std::cout << "Word Count: " << word_count << std::endl; }
     // Prints all relevant data to a file.
@@ -55,6 +57,15 @@ std::string Analyzer::processWord(std::string &s) {
     return s;
 }
 
+std::string Analyzer::findLongestWord() {
+    std::string longest_word = frequency.begin()->first;
+    for (std::pair<std::string, int> word : frequency) {
+        if (word.first.length() > longest_word.length())
+            longest_word = word.first;
+    }
+    return longest_word;
+}
+
 std::string Analyzer::removeExtension(const std::string &s) {
     size_t last_index = s.find_last_of(".");
     std::string n_string = s.substr(0, last_index);
@@ -76,6 +87,7 @@ bool Analyzer::printDataToFile() {
         for (std::pair<std::string, int> word : frequency) {
             file << "Word: " << word.first << "\tFrequency: " << word.second << std::endl;
         }
+        file << "Longest word is " << findLongestWord() << std::endl;
         file << "Word Count: " << word_count << std::endl;
         file.close();
         status = true;

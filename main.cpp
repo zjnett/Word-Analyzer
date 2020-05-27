@@ -21,6 +21,7 @@ int main(void) {
         // if text could be loaded successfully
         std::cout << "Text loaded successfully!" << std::endl;
         a.printFrequency();
+        std::cout << "Longest word is " << a.findLongestWord() << std::endl;
         a.printWordCount();
         if (a.printDataToFile()) {
             std::cout << "Successfully wrote to file!\n";
