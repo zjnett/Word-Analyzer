@@ -18,9 +18,16 @@ public:
     void printFrequency();
     // Prints current word count.
     void printWordCount() { std::cout << "Word Count: " << word_count << std::endl; }
+    // Prints all relevant data to a file.
+    bool printDataToFile();
 
 private:
-    std::string processWord(std::string s);
+    //      Private utility functions
+    // Removes non-alphanumeric characters from a word, returns processed word.
+    std::string processWord(std::string &s);
+    std::string removeExtension(const std::string &s);
+
+    //      Data members
     std::string id;
     int word_count;
     std::unordered_map<std::string, int> frequency;
@@ -31,7 +38,7 @@ bool Analyzer::loadText(const std::string &filename) {
     std::fstream file;
     file.open(filename);
     if (file.is_open()) {
-        setID(filename);
+        setID(removeExtension(filename));
         std::string word = "";
         while (file >> word) {
             word = processWord(word);
@@ -43,15 +50,37 @@ bool Analyzer::loadText(const std::string &filename) {
     return status;
 }
 
-std::string Analyzer::processWord(std::string s) {
+std::string Analyzer::processWord(std::string &s) {
     s.erase(std::remove_if(s.begin(), s.end(), [](char c) { return !isalpha(c); } ), s.end());
     return s;
+}
+
+std::string Analyzer::removeExtension(const std::string &s) {
+    size_t last_index = s.find_last_of(".");
+    std::string n_string = s.substr(0, last_index);
+    return n_string;
 }
 
 void Analyzer::printFrequency() {
     for (std::pair<std::string, int> word : frequency) {
         std::cout << "Word: " << word.first << "\tFrequency: " << word.second << std::endl;
     }
+}
+
+bool Analyzer::printDataToFile() {
+    bool status = false;
+    std::string filename = id + "-data.txt";
+    std::ofstream file;
+    file.open(filename);
+    if (file.is_open()) {
+        for (std::pair<std::string, int> word : frequency) {
+            file << "Word: " << word.first << "\tFrequency: " << word.second << std::endl;
+        }
+        file << "Word Count: " << word_count << std::endl;
+        file.close();
+        status = true;
+    }
+    return status;
 }
 
 /*

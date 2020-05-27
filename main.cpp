@@ -22,6 +22,11 @@ int main(void) {
         std::cout << "Text loaded successfully!" << std::endl;
         a.printFrequency();
         a.printWordCount();
+        if (a.printDataToFile()) {
+            std::cout << "Successfully wrote to file!\n";
+        } else {
+            std::cout << "Error writing to file!\n";
+        }
     } else {
         std::cout << "Error loading text." << std::endl;
     }
