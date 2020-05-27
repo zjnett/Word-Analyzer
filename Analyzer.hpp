@@ -131,7 +131,9 @@ void Analyzer::printFrequency() {
 void Analyzer::printCommonWords(std::vector<std::string> &words) {
     std::cout << "Most common words: ";
     for (int i = 0; i < words.size(); i++) {
-        std::cout << words[i] << " ";
+        std::cout << words[i];
+        if (i != words.size()-1)
+            std::cout << ", ";
     }
     std::cout << std::endl;
 }
