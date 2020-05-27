@@ -6,13 +6,11 @@
 */
 #include "TextAnalyzer.hpp"
 
+
 /*
-    TODO:
-    >   Load text (.txt file, into what data structure?)
-    >   Find average word length
-    >   Find longest word
-    >   Find shortest word
-    >   Find most common words
+    TODO: 
+    >   keep track of data in struct/class for file printing
+        (right now code does double the work that it needs to)
 */
 
 int main(void) {
@@ -24,6 +22,8 @@ int main(void) {
         std::cout << "Longest word is " << a.findLongestWord() << std::endl;
         std::cout << "Shortest word is " << a.findShortestWord() << std::endl;
         std::cout << "Average word length is " << a.findAverageWordLength() << std::endl;
+        std::vector<std::string> most_common_words = a.findMostCommonWords();
+        a.printCommonWords(most_common_words);
         a.printWordCount();
         if (a.printDataToFile()) {
             std::cout << "Successfully wrote to file!\n";

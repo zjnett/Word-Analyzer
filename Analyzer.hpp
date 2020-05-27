@@ -22,8 +22,12 @@ public:
     std::string findShortestWord();
     // Finds average word length in frequency list, returns average word length.
     double findAverageWordLength();
+    // Finds three most common words and returns them in a std::vector.
+    std::vector<std::string> findMostCommonWords();
     // Prints current word count.
     void printWordCount() { std::cout << "Word Count: " << word_count << std::endl; }
+    // Print vector of most common words
+    void printCommonWords(std::vector<std::string> &words);
     // Prints all relevant data to a file, returns if file was able to be created/written to.
     bool printDataToFile();
 
@@ -88,6 +92,24 @@ double Analyzer::findAverageWordLength() {
     return (double) sum_word_lengths / word_count;
 }
 
+std::vector<std::string> Analyzer::findMostCommonWords() {
+    std::pair<std::string, int> max = { frequency.begin()->first, frequency.begin()->second },
+        second_max = max,
+        third_max = max;
+    std::vector<std::string> result;
+    for (std::pair<std::string, int> word : frequency) {
+        if (word.second > max.second) {
+            third_max = second_max;
+            second_max = max;
+            max = word;
+        }
+    }
+    result.push_back(max.first);
+    result.push_back(second_max.first);
+    result.push_back(third_max.first);
+    return result;
+}
+
 std::string Analyzer::removeExtension(const std::string &s) {
     size_t last_index = s.find_last_of(".");
     std::string n_string = s.substr(0, last_index);
@@ -98,6 +120,14 @@ void Analyzer::printFrequency() {
     for (std::pair<std::string, int> word : frequency) {
         std::cout << "Word: " << word.first << "\tFrequency: " << word.second << std::endl;
     }
+}
+
+void Analyzer::printCommonWords(std::vector<std::string> &words) {
+    std::cout << "Most common words: ";
+    for (int i = 0; i < words.size(); i++) {
+        std::cout << words[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 bool Analyzer::printDataToFile() {
@@ -118,9 +148,3 @@ bool Analyzer::printDataToFile() {
     }
     return status;
 }
-
-/*
-    a.findShortestWord();
-    a.findMostCommonWords();
-
-*/
