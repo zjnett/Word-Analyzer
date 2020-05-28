@@ -15,6 +15,7 @@
 #include <string>
 #include <algorithm>
 #include <chrono>
+#include <thread>
 #include "Analyzer.hpp"
 
 #endif

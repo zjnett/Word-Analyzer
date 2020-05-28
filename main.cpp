@@ -13,12 +13,19 @@
         (right now code does double the work that it needs to)
 */
 
-int main(void) {
+int main(int argc, char **argv) {
+
+    if (argc != 2) {
+        std::cout << "Unexpected argument count, usage:\n./a.out <filename>" << std::endl;
+        return 1;
+    }
+    const std::string filename(argv[1]);
+
     Analyzer a;
 
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
-    if (a.loadText("frankenstein.txt")) {
+    if (a.loadText(filename)) {
         // if text could be loaded successfully
         std::cout << "Text loaded successfully!" << std::endl;
         a.printFrequency();
