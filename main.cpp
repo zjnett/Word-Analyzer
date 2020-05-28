@@ -44,10 +44,11 @@ int main(int argc, char **argv) {
 
     if (a.loadText(filename)) {
         //          SINGLE-THREADED SECTION
-        /*std::string longest_word = a.findLongestWord();
-        std::string shortest_word = a.findShortestWord();
-        double average_length = a.findAverageWordLength();
-        std::vector<std::string> most_common_words = a.findMostCommonWords();*/
+        /*std::cout << "Longest word is " << a.findLongestWord() << std::endl;
+        std::cout << "Shortest word is " << a.findShortestWord() << std::endl;
+        std::cout << "Average word length is " << a.findAverageWordLength() << std::endl;
+        std::vector<std::string> most_common_words = a.findMostCommonWords();
+        a.printCommonWords(most_common_words);*/
 
         //std::cout << "Text loaded successfully!" << std::endl;
         //a.printFrequency();
