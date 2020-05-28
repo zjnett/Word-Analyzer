@@ -50,8 +50,8 @@ int main(int argc, char **argv) {
         std::vector<std::string> most_common_words = a.findMostCommonWords();
         a.printCommonWords(most_common_words);*/
 
-        //std::cout << "Text loaded successfully!" << std::endl;
-        //a.printFrequency();
+        std::cout << "Text loaded successfully!" << std::endl;
+        a.printFrequency();
 
         //          MULTI-THREADED SECTION
         std::thread long_word_thread(longWord, a);
