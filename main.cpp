@@ -26,18 +26,22 @@ int main(int argc, char **argv) {
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
     if (a.loadText(filename)) {
-        // if text could be loaded successfully
-        std::cout << "Text loaded successfully!" << std::endl;
-        a.printFrequency();
-        std::cout << "Longest word is " << a.findLongestWord() << std::endl;
-        std::cout << "Shortest word is " << a.findShortestWord() << std::endl;
-        std::cout << "Average word length is " << a.findAverageWordLength() << std::endl;
+        std::string longest_word = a.findLongestWord();
+        std::string shortest_word = a.findShortestWord();
+        double average_length = a.findAverageWordLength();
         std::vector<std::string> most_common_words = a.findMostCommonWords();
-        a.printCommonWords(most_common_words);
-        a.printWordCount();
 
         std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time_took = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+
+        std::cout << "Text loaded successfully!" << std::endl;
+        //a.printFrequency();
+        std::cout << "Longest word is " << a.findLongestWord() << std::endl;
+        std::cout << "Shortest word is " << a.findShortestWord() << std::endl;
+        std::cout << "Average word length is " << a.findAverageWordLength() << std::endl;
+        a.printCommonWords(most_common_words);
+        a.printWordCount();
+
         std::cout << "Program took " << time_took.count() << " seconds to calculate." << std::endl;
 
         if (a.printDataToFile()) {
